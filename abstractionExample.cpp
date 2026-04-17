@@ -1,21 +1,27 @@
 #include<iostream>
-#include<string>
 using namespace std;
 
- class Shape{
-    virtual void draw() = 0; //pure virtual function.
-    // a class with pure virtual function automatically becomes an abstract class
+class Animal {
+public:
+    // Pure virtual function ? makes class abstract
+    virtual void speak() = 0; 
+
+    // Can have non-virtual helpers too
+    void sleep() { cout << "Zzz...\n"; }
 };
 
-class Circle : public Shape{
-    public:
-    void draw(){
-        cout<<"Drawing a circle.\n";
-    }
-};
+class Dog : public Animal { 
+	void speak() override {
+		cout<<"Dog says woof!\n";
+	}
+//	void sleep() override{
+//		cout<<"Dog is sleeping.\n";
+//	}
+ }; // must implement speak()
+
 int main(){
-    Circle c;
-    c.draw();
-
-    return 0;
+Animal* a = new Dog();
+    a->speak(); // Output: "Woof!" ?
+    a->sleep();
+    delete a;
 }
